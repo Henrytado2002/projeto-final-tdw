@@ -4,11 +4,13 @@ import './login.css';
 import { doSignInWithEmailAndPassword, doCreateUserWithEmailAndPassword } from '../firebase/auth';
 import { useAuth } from '../context/authContext';
 import isEmail from 'validator/lib/isEmail';
-import { Navigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { createUserDocument } from '../firebase/firestore'; // Import Firestore function
 
 const Login = () => {
 
+    const navigate = useNavigate();
+    
     //authentication
     const { userLoggedIn } = useAuth();
 
@@ -18,9 +20,11 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [name, setName] = useState('');
 
-    function sendErrorMessage() {
-        alert(errorMessage);
-    }
+    useEffect(() => {
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+    }, [errorMessage]);
 
     function doInputVerifications(){ //returns false if there are errors
         if (email === '' || password === '') {
@@ -35,26 +39,28 @@ const Login = () => {
     }
 
     async function handleLogin(){
-        if(!doInputVerifications()){
-            sendErrorMessage();
+        if(!doInputVerifications()){ 
             return;
         }
-        await doSignInWithEmailAndPassword(email, password);
+        try{
+            await doSignInWithEmailAndPassword(email, password);
+            navigate('/otherpage');
+        }catch(error){
+            setErrorMessage(error.message);
+            return;
+        }
     }
 
     async function handleRegister(){
         if(!doInputVerifications()){
-            sendErrorMessage();
             return;
         }
         if (name === '' || confirmPassword === ''){
             setErrorMessage('All fields must not be empty');
-            sendErrorMessage();
             return;
         }
         if (password !== confirmPassword){
             setErrorMessage('Passwords do not match');
-            sendErrorMessage();
             return;
         }
         
@@ -84,7 +90,7 @@ const Login = () => {
                         <div className='login-form'>
                             <input className='login-input' type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                             <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                            <button className='login-form-submit' onClick={handleLogin}>Login</button>
+                            <button className='login-form-submit' onClick={()=>handleLogin()}>Login</button>
                             <input className='placeholder-input' />
                             <input className='placeholder-input' />
                         </div>
@@ -95,7 +101,7 @@ const Login = () => {
                             <input className='login-input' type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
                             <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                             <input className='login-input' type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}/>
-                            <button className='login-form-submit' onClick={handleRegister}>Register</button>
+                            <button className='login-form-submit' onClick={()=>handleRegister()}>Register</button>
                         </div>
                     )}
                     <div className='login-link-container'>
