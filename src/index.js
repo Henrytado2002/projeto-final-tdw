@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 import App from './App';
-import Login from './authentication/login';
+import Login from './Login/login';
 import Otherpage from './otherpage';
 
 import './index.css';
+import { AuthProvider } from './context/authContext';
 
 //######## ROUTING ##########
 
@@ -20,8 +21,10 @@ const router = createBrowserRouter([{
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
+<AuthProvider>
   <RouterProvider router={router} />
+</AuthProvider>
+
 
 
 

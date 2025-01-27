@@ -1,10 +1,9 @@
-import Login from './authentication/login';
+import Login from './Login/login';
 import './App.css';
 
 function App() {
   return (
     <>
-    <Login />
     </>
   );
 }
