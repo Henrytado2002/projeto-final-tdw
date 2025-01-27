@@ -36,11 +36,11 @@ const Login = () => {
                         </div>
                     )}
                     <div className='login-link-container'>
-                        <a className='login-register-first-text'>{ !showRegister? "not registered yet? ":"" }</a>
-                        <a className='login-register-link' onClick={handleRegisterClick}>
+                        <a href='' className='login-register-first-text'>{ !showRegister? "not registered yet? ":"" }</a>
+                        <a href='' className='login-register-link' onClick={handleRegisterClick}>
                             {showRegister ? 'Back to Login' : "Create an account"}
                         </a> 
-                        <a></a>  
+                          
                     </div>
                     
                 </div>
