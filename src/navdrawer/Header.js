@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import './Header.css';
+import { useSelector } from 'react-redux';
 
 function Header() {
     const menuRef = useRef(null);
+    const user = useSelector((state) => state.user);
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -43,6 +45,7 @@ function Header() {
                 <li><a href="#">Option1</a></li>
                 <li><a href="#">Option2</a></li>
                 <li><a href="#">Option3</a></li>
+                <li className='profile'><a href="#">logout</a></li>
             </ul>
         </header>
     );
