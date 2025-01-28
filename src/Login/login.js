@@ -51,22 +51,28 @@ const Login = () => {
         }
     }
 
-    async function handleRegister(){
-        if(!doInputVerifications()){
-            return;
+    async function handleRegister() {
+        if (!doInputVerifications()) {
+          	return;
         }
-        if (name === '' || confirmPassword === ''){
-            setErrorMessage('All fields must not be empty');
-            return;
+        if (name === '' || confirmPassword === '') {
+          	setErrorMessage('All fields must not be empty');
+          	return;
         }
-        if (password !== confirmPassword){
-            setErrorMessage('Passwords do not match');
-            return;
+        if (password !== confirmPassword) {
+          	setErrorMessage('Passwords do not match');
+          	return;
         }
-        
-        const userCredential = await doCreateUserWithEmailAndPassword(email, password);
-        await createUserDocument(userCredential.user.uid, { email, name }); // Create Firestore document
-    }
+      
+        try {
+          	const userCredential = await doCreateUserWithEmailAndPassword(email, password, name);
+          	await createUserDocument(userCredential.user);
+          	handleRegisterLinkClick();
+			alert('User created successfully.\nPlease login to continue');
+        } catch (error) {
+          	setErrorMessage(error.message);
+        }
+      }
 
     //effects
     const [showRegister, setShowRegister] = useState(false);
