@@ -44,7 +44,7 @@ const Login = () => {
         }
         try{
             await doSignInWithEmailAndPassword(email, password);
-            navigate('/otherpage');
+            navigate('/home');
         }catch(error){
             setErrorMessage(error.message);
             return;
@@ -68,7 +68,7 @@ const Login = () => {
           	const userCredential = await doCreateUserWithEmailAndPassword(email, password, name);
           	await createUserDocument(userCredential.user);
           	handleRegisterLinkClick();
-			alert('User created successfully.\nPlease login to continue');
+			navigate('/home');
         } catch (error) {
           	setErrorMessage(error.message);
         }

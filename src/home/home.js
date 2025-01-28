@@ -1,4 +1,4 @@
-import Header from "./NavDrawer/NavDrawer";
+import Header from '../navdrawer/Header';
 
 function Home() {
     return (

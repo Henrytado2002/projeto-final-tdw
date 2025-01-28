@@ -4,10 +4,11 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 import App from './App';
 import Login from './Login/login';
-import Otherpage from './otherpage';
+import Home from './home/home';
 
 import './index.css';
 import { AuthProvider } from './context/authContext';
+
 
 //######## ROUTING ##########
 
@@ -15,8 +16,8 @@ const router = createBrowserRouter([{
   path: '/',
   element: <Login/> 
 },{
-  path: '/otherpage',
-  element: <Otherpage/>
+  path: '/home',
+  element: <Home/>
 }])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
