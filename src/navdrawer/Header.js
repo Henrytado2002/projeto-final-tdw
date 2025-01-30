@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react';
+
+import '../index.css';
 import './Header.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const menuRef = useRef(null);
     const user = useSelector((state) => state.user);
+    const navigate=useNavigate(); 
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -42,10 +46,11 @@ function Header() {
             
             {/* Menu */}
             <ul className="menu">
-                <li><a href="#">Option1</a></li>
-                <li><a href="#">Option2</a></li>
-                <li><a href="#">Option3</a></li>
-                <li className='profile'><a href="#">logout</a></li>
+                <li><button href="#" onClick={()=>navigate('/home')}>Home</button></li>
+                <li><button href="#" onClick={()=>navigate('/pokedle')}>Pokedle</button></li>
+                <li><button href="#">Option2</button></li>
+                <li><button href="#">Option3</button></li>
+                <li className='profile'><button href="#">logout</button></li>
             </ul>
         </header>
     );

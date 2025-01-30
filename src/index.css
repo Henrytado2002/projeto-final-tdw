@@ -1,6 +1,36 @@
+:root{
+  --color-lightwhite: #FFFAEC;
+  --color-darklight: #F5ECD5;
+  --color-lightning: #fce834;
+  --color-darkblue: #3d49b1;
+  --color-lightblue: #8fb7d8;
+  --color-dark: #3D3D3D;
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+  z-index: 100; 
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-darkblue);
+  
+}
+
+*::-webkit-scrollbar-track {
+  background:white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
 body {
   margin: 0;
-  
+  font-family: 'Courier New', Courier, monospace;
+}
+
+html{
+  overflow-y: hidden;
 }
 
 

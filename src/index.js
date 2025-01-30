@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import Login from './Login/login';
 import Home from './home/home';
+import Pokedle from './pokedle/pokedle';
 
 import './index.css';
 import { AuthProvider } from './context/authContext';
@@ -19,6 +20,9 @@ const router = createBrowserRouter([{
 },{
   path: '/home',
   element: <Home/>
+},{
+  path: '/pokedle',
+  element: <Pokedle/>
 }])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,10 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../navdrawer/Header';
+import { useAuth } from '../context/authContext';
 
 function Home() {
     const user = useSelector((state) => state.user);
-    
+    const { loading } = useAuth();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>

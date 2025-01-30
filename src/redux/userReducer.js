@@ -4,7 +4,6 @@ const initialState = {
     uid: null,
     email: null,
     name: null,
-    movies: [],
 };
 
 const userSlice = createSlice({

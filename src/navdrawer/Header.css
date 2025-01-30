@@ -2,15 +2,14 @@
 .header {
     display: flex;
     flex-direction: row;
-    padding: 0px 50px;
+    padding: 10px 20px;
     align-items: center;
     justify-content: space-between;
     font-family: 'Roboto', sans-serif;
-    position: relative;
-    min-width: 300px;
-    background-color: #333; 
-    color: #fff; 
-    height: 60px;
+    position: absolute;
+    background-color: transparent; 
+    color: var(--color-lightwhite); 
+    height: 50px;
 }
 
 a, label{
@@ -32,26 +31,31 @@ a, label{
     position: relative;
     user-select: none;
     z-index: 3; 
-    padding: 5px;
-    border-radius: 8px; 
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px; 
     transition: background-color 0.3s ease; 
+    background-color: var(--color-darkblue);
 }
 
 .header .menu-icon:hover {
-    background-color: #555; 
+    background-color: rgb(96, 96, 252); 
 }
 
 .header .menu-icon .menu-text {
     margin-left: 10px; 
-    color: #fff; 
-    font-size: 16px; 
+    color: var(--color-lightning); 
+    font-size: 2em;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold; 
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .header .menu-icon .navicon {
-    background: #fff; 
+    background: var(--color-lightning); 
     display: block;
-    height: 2.5px;
+    height: 4px;
     width: 30px;
     position: relative;
     transition: background 0.2s ease-out;
@@ -59,10 +63,10 @@ a, label{
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-    background: #fff; 
+    background: var(--color-lightning); 
     content: '';
     display: block;
-    height: 2.5px;
+    height: 4px;
     width: 30px;
     position: absolute;
     transition: all 0.2s ease-out;
@@ -70,11 +74,11 @@ a, label{
 }
 
 .header .menu-icon .navicon:before {
-    top: 6px;
+    top: 7px;
 }
 
 .header .menu-icon .navicon:after {
-    top: -6px;
+    top: -7px;
 }
 
 .header .menu-btn:checked ~ .menu {
@@ -106,21 +110,23 @@ a, label{
 /* Menu */
 .header .menu {
     position: absolute;
-    top: 60px;
+    top: 0;
     left: 0;
     height: calc(100vh - 90px); 
     width: 200px;
-    background-color: #333; 
+    background-color: var(--color-darkblue); 
     z-index: 1; 
     display: flex;
     flex-direction: column;
     transform: translateX(-100%);
     transition: transform 0.3s ease-out; 
     margin: 0;
-    padding: 30px 50px;
+    padding: 90px 50px;
     text-align: left;
     align-items: flex-start;
     gap: 40px;
+    max-height: 100vh;
+    align-items: center;
 }
 
 .header .menu li {
@@ -128,13 +134,25 @@ a, label{
     text-align: left;
 }
 
-.header .menu li a {
-    text-decoration: none;
-    font-size: 16px;
-    color: #fff;
-    cursor: pointer;
-}
+
 
 .header .menu li a:hover {
     color: #ddd; 
+}
+
+.header .menu button{
+    border-radius: 10px;
+    height: 70px;
+    width: 200px;
+    padding: 5px 10px;
+    color: var(--color-lightning);
+    border: 3px solid var(--color-lightning);
+    background-color: transparent;
+    font-size: 2.3em;
+    font-weight: bold;
+}
+
+.header .menu button:hover{
+    background-color: rgb(96, 96, 252);
+    cursor: pointer;
 }

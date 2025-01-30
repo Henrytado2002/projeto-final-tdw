@@ -1,0 +1,165 @@
+.pokedle{
+    overflow-y: hidden;
+}
+
+.pokedle-container-wrapper{
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+.playarea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 46% ;
+    overflow-y: scroll;
+    overflow-x: visible;
+    
+}
+
+.playarea::-webkit-scrollbar {
+    width: 0px;
+}
+  
+.playarea::-webkit-scrollbar-thumb {
+    width: 0px;
+    
+}
+  
+.playarea::-webkit-scrollbar-track {
+    width: 0;
+}
+
+.win-message-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes grow {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.win-message {
+    position: absolute;
+    background-color: rgb(51, 51, 51);
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+    animation: grow 0.3s ease-out; /* Apply the grow animation */
+    width: 350px;
+    
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.win-message-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.win-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.win-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    background-color: rgba(51, 51, 51, 0.658);
+    height: 100%;
+    width: 100%;
+}
+
+.win-button{
+    background-color: var(--color-lightblue);
+    color: var(black);
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+}
+
+
+.pokedle-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 50px) ;
+    background-color: rgba(255, 255, 255, 0.726);
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
+.pokedle-container-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+    background-image: url("../../public/backgroun.png");
+    background-position: center;
+    background-size: 3000px;
+    background-repeat: no-repeat;
+}
+
+.pokedle-title{
+    height: 150px;
+    margin-bottom: 50px;
+}
+
+.guesses-header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.guesses-header-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+    border: 3px solid transparent;
+    font-size: 0.9em;
+    font-weight: bold;
+}

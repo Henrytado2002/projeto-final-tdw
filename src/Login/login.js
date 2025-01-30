@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import './login.css';
-
-import { doSignInWithEmailAndPassword, doCreateUserWithEmailAndPassword } from '../firebase/auth';
+import React, { useState, useEffect } from 'react';
+import { doSignInWithEmailAndPassword } from '../firebase/auth';
 import { useAuth } from '../context/authContext';
 import isEmail from 'validator/lib/isEmail';
-import {useNavigate} from 'react-router-dom';
-import { createUserDocument } from '../firebase/firestore'; // Import Firestore function
+import { useNavigate } from 'react-router-dom';
+
+import './login.css';
 
 const Login = () => {
-
     const navigate = useNavigate();
-    
-    //authentication
-    const { userLoggedIn } = useAuth();
-
+    const { registerUser } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,26 +21,26 @@ const Login = () => {
         }
     }, [errorMessage]);
 
-    function doInputVerifications(){ //returns false if there are errors
+    function doInputVerifications() { //returns false if there are errors
         if (email === '' || password === '') {
             setErrorMessage('All fields must not be empty');
             return false;
         }
-        if (isEmail(email) === false){
+        if (!isEmail(email)) {
             setErrorMessage('Email is not valid');
             return false;
         }
         return true;
     }
 
-    async function handleLogin(){
-        if(!doInputVerifications()){ 
+    async function handleLogin() {
+        if (!doInputVerifications()) {
             return;
         }
-        try{
+        try {
             await doSignInWithEmailAndPassword(email, password);
             navigate('/home');
-        }catch(error){
+        } catch (error) {
             setErrorMessage(error.message);
             return;
         }
@@ -53,28 +48,25 @@ const Login = () => {
 
     async function handleRegister() {
         if (!doInputVerifications()) {
-          	return;
+            return;
         }
         if (name === '' || confirmPassword === '') {
-          	setErrorMessage('All fields must not be empty');
-          	return;
+            setErrorMessage('All fields must not be empty');
+            return;
         }
         if (password !== confirmPassword) {
-          	setErrorMessage('Passwords do not match');
-          	return;
+            setErrorMessage('Passwords do not match');
+            return;
         }
-      
-        try {
-          	const userCredential = await doCreateUserWithEmailAndPassword(email, password, name);
-          	await createUserDocument(userCredential.user);
-          	handleRegisterLinkClick();
-			navigate('/home');
-        } catch (error) {
-          	setErrorMessage(error.message);
-        }
-      }
 
-    //effects
+        try {
+            await registerUser(email, password, name);
+            navigate('/home');
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    }
+
     const [showRegister, setShowRegister] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -95,26 +87,27 @@ const Login = () => {
                     {!showRegister && (
                         <div className='login-form'>
                             <input className='login-input' type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                            <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                            <button className='login-form-submit' onClick={()=>handleLogin()}>Login</button>
+                            <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                            <button className='login-form-submit' onClick={handleLogin}>Login</button>
                             <input className='placeholder-input' />
+                            <button className='login-form-submit' onClick={() => { navigate('/home') }}>go to home</button>
                             <input className='placeholder-input' />
                         </div>
                     )}
                     {showRegister && (
                         <div className='login-form'>
-                            <input className='login-input' type="text" placeholder="Username" onChange={(e) => setName(e.target.value)}/>
-                            <input className='login-input' type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-                            <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                            <input className='login-input' type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}/>
-                            <button className='login-form-submit' onClick={()=>handleRegister()}>Register</button>
+                            <input className='login-input' type="text" placeholder="Username" onChange={(e) => setName(e.target.value)} />
+                            <input className='login-input' type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                            <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                            <input className='login-input' type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <button className='login-form-submit' onClick={handleRegister}>Register</button>
                         </div>
                     )}
                     <div className='login-link-container'>
-                        <p href='' className='login-register-first-text'>{ !showRegister? "Not registered yet? ":"" }</p>
+                        <p href='' className='login-register-first-text'>{!showRegister ? "Not registered yet? " : ""}</p>
                         <button href='' className='login-register-link' onClick={handleRegisterLinkClick}>
                             {showRegister ? 'Back to Login' : "Create an account"}
-                        </button> 
+                        </button>
                     </div>
                 </div>
             </div>
