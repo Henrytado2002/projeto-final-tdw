@@ -18,10 +18,15 @@
     background-image: url("../../../public/up-arrow.png");
 }
 
-.wrong-decrease, .wrong-increase{
+.wrong-increase{
     background-repeat: none;
     background-size: 140%;
     background-position: top;
+}
+.wrong-decrease{
+    background-repeat: none;
+    background-size: 140%;
+    background-position: 72px -24px;
 }
 
 .guess-row{

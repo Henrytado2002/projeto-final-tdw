@@ -150,9 +150,11 @@ a, label{
     background-color: transparent;
     font-size: 2.3em;
     font-weight: bold;
+    transition: ease 200ms;
 }
 
 .header .menu button:hover{
     background-color: rgb(96, 96, 252);
     cursor: pointer;
+    transition: ease 200ms;
 }

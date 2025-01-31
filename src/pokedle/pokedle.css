@@ -61,8 +61,8 @@
     color: white;
     z-index: 1000;
     animation: grow 0.3s ease-out; /* Apply the grow animation */
-    width: 350px;
-    
+    width: 450px;
+    height: 450px;
 }
 
 .close-button {
@@ -91,6 +91,7 @@
 
 .win-text {
     position: absolute;
+    align-content: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -111,9 +112,14 @@
     cursor: pointer;
     font-size: 1.2em;
     font-weight: bold;
-    width: 100%;
+    width: 80%;
 }
 
+.pokemon-guessed-win-image{
+    margin-top: -40px;
+    width: 200px;
+    margin-bottom: -40px;
+}
 
 .pokedle-container{
     display: flex;

@@ -1,7 +1,6 @@
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { db } from "./firestore"; // Import Firestore database
-import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
+import { createUserDocument } from "./firestore"; // Import createUserDocument function
 
 export const doCreateUserWithEmailAndPassword = async (email, password, name) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -12,11 +11,7 @@ export const doCreateUserWithEmailAndPassword = async (email, password, name) =>
   });
 
   // Create a user document in Firestore
-  await setDoc(doc(db, "users", user.uid), {
-    uid: user.uid,
-    email: user.email,
-    name: name, // Ensure the name is passed correctly
-  });
+  await createUserDocument(user);
 
   return user;
 };
@@ -27,4 +22,8 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 
 export const doSignOut = async () => {
   return auth.signOut();
+};
+
+export const getCurrentUser = () => {
+  return auth.currentUser;
 };

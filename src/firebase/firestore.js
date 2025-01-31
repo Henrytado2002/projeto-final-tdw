@@ -1,7 +1,5 @@
-import { getFirestore, doc, setDoc} from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, increment, arrayUnion } from "firebase/firestore";
 
-
-// Initialize Firestore
 export const db = getFirestore();
 
 export const createUserDocument = async (user) => {
@@ -13,7 +11,10 @@ export const createUserDocument = async (user) => {
         uid: user.uid,
         email: user.email,
         name: user.displayName || "noname",
-        createdAt: new Date(),
+        createdAt: new Date().toISOString(), // Use ISO string format
+        pokedleGamesWon: 0,
+        pokedleGuesses: [],
+        memokemonGamesWon: 0,
     };
 
     try {
@@ -25,3 +26,30 @@ export const createUserDocument = async (user) => {
     return userRef;
 };
 
+export const incrementPokedleGamesWon = async (userId) => {
+    if (!userId) return;
+
+    const userRef = doc(db, "users", userId);
+
+    try {
+        await updateDoc(userRef, {
+            pokedleGamesWon: increment(1),
+        });
+    } catch (error) {
+        console.error("Error incrementing pokedleGamesWon: ", error);
+    }
+};
+
+export const submitGuesses = async (userId, guesses) => {
+    if (!userId) return;
+
+    const userRef = doc(db, "users", userId);
+
+    try {
+        await updateDoc(userRef, {
+            pokedleGuesses: arrayUnion(...guesses)
+        });
+    } catch (error) {
+        console.error("Error incrementing pokedleGamesWon: ", error);
+    }
+};

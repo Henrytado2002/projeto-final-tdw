@@ -4,10 +4,9 @@ import PokemonSearch from './pokemonSearch/pokemonSearch';
 import Guess from './Guess/guess';
 import { useGetGen1PokemonListQuery, useGetPokemonByNameQuery } from '../redux/pokemonSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { incrementPokedleGamesWon, submitGuesses } from '../firebase/firestore';
 import { setRealPokemon } from '../redux/selectedPokemonSlice';
 import './pokedle.css';
-
-
 
 const Pokedle = () => {
     const dispatch = useDispatch();
@@ -15,6 +14,7 @@ const Pokedle = () => {
     const [guesses, setGuesses] = useState([]);
     const [hasWon, setHasWon] = useState(false);
     const [showWinMessage, setShowWinMessage] = useState(false);
+    const user = useSelector((state) => state.user)
 
     useEffect(() => {
         if (pokemonList && pokemonList.results) {
@@ -24,25 +24,35 @@ const Pokedle = () => {
     }, [pokemonList, dispatch]);
 
     const handlePokemonClick = (pokemonName) => {
-        if(guesses.includes(pokemonName)){
-            alert('You already guessed that pokemon!')
-        }else{
-            setGuesses((prevGuesses) => [pokemonName, ...prevGuesses ]);
+        if (guesses.includes(pokemonName)) {
+            alert('You already guessed that pokemon!');
+        } else {
+            setGuesses((prevGuesses) => [pokemonName, ...prevGuesses]);
         }
     };
 
     const selectedPokemon = useSelector((state) => state.selectedPokemon.realPokemon);
     const realPokemon = useSelector((state) => state.selectedPokemon.selectedPokemon);
+    const { data: realPokemonData } = useGetPokemonByNameQuery(realPokemon);
 
     useEffect(() => {
         win();
     }, [guesses]);
 
-    const win = () => {
+    const win = async() => {
         if (selectedPokemon === realPokemon && !(selectedPokemon === null || realPokemon === null)) {
             setHasWon(true);
             setShowWinMessage(true);
         }
+        if (user) {
+            await incrementPokedleGamesWon(user.uid); // Increment games won for the user
+            await submitGuesses(user.id, guesses); //add the number of guesses to the array in the user document 
+            
+        }
+    };
+
+    const handleCloseWinMessage = () => {
+        setShowWinMessage(false);
     };
 
     if (isLoading) {
@@ -64,8 +74,9 @@ const Pokedle = () => {
             <Header />
             <div className="pokedle-container-wrapper">
                 <div className="pokedle-container">
-                    <img src='./pokedle.png' className="pokedle-title"/>
-                    <PokemonSearch onPokemonClick={handlePokemonClick} />
+                    <img src="/pokedle.png" className="pokedle-title" alt="Pokedle Title"/>
+                    <PokemonSearch onPokemonClick={handlePokemonClick} hasWon={hasWon} />
+                    <div className="playarea">
                         <h2 className='playarea-title'>Previous Guesses:</h2>
                         <div className="guesses-header">
                             <div className="guesses-header-item">Sprite</div>
@@ -76,27 +87,28 @@ const Pokedle = () => {
                             <div className="guesses-header-item">Height</div>
                             <div className="guesses-header-item">Weight</div>
                         </div>
-                    <div className="playarea">
                         {guesses.map((pokemonName, index) => (
                             <Guess key={index} pokemonName={pokemonName} />
                         ))}
                     </div>
                 </div>
             </div>
-            {showWinMessage &&  (
+            {showWinMessage && (
                 <div className="win-message-wrapper">
                     <div className="win-message">
                         <div className="win-message-content">
                             <img className='win-img' src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGEzcjJ3N2FtZmdxYzNndnZkbnFoeGU2enBodG9iZ3N0aXZsejY3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yOWoBXl9clt5dBDstA/giphy.gif" alt="celebration" />
                             <div className="win-text">
-                            <button className="close-button" onClick={()=>{setShowWinMessage(false)}}>X</button>
-                                <h2>Congratulations!</h2>
-                                <h2>You've guessed the pokemon!</h2>
-                                <img></img>
-                                <h2>Guesses: {guesses.length}</h2>
+                                <button className="close-button" onClick={handleCloseWinMessage}>X</button>
+                                <h2>Congratulations,<br/>you've guessed it!</h2>
+                                <h2>It was  {realPokemon}</h2>
+                                {realPokemonData && realPokemonData.sprites && (
+                                    <img className='pokemon-guessed-win-image' src={realPokemonData.sprites.front_default} alt="Guessed Pokemon" />
+                                )}
+                                <h2>Number of guesses: {guesses.length}</h2>
+                                <button className='win-button' onClick={() => window.location.reload()}>Play Again</button>
                             </div>
                         </div>
-                        <button className='win-button' onClick={() => window.location.reload()}>Play Again</button>
                     </div>
                 </div>
             )}

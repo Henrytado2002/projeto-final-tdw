@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { doSignInWithEmailAndPassword } from '../firebase/auth';
-import { useAuth } from '../context/authContext';
-import isEmail from 'validator/lib/isEmail';
+import { doSignInWithEmailAndPassword, doCreateUserWithEmailAndPassword } from '../firebase/auth';
 import { useNavigate } from 'react-router-dom';
-
+import isEmail from 'validator/lib/isEmail';
 import './login.css';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/userReducer';
+import { fetchUser } from '../redux/userActions';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { registerUser } = useAuth();
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -38,7 +39,10 @@ const Login = () => {
             return;
         }
         try {
-            await doSignInWithEmailAndPassword(email, password);
+            const userCredential = await doSignInWithEmailAndPassword(email, password);
+            const user = userCredential.user;
+            
+            dispatch(fetchUser(user.uid)); // Fetch and set user data in Redux store
             navigate('/home');
         } catch (error) {
             setErrorMessage(error.message);
@@ -60,7 +64,10 @@ const Login = () => {
         }
 
         try {
-            await registerUser(email, password, name);
+            await doCreateUserWithEmailAndPassword(email, password, name);
+            const userCredential = await doSignInWithEmailAndPassword(email, password);
+            const user = userCredential.user;
+            dispatch(fetchUser(user.uid)); // Fetch and set user data in Redux store
             navigate('/home');
         } catch (error) {
             setErrorMessage(error.message);

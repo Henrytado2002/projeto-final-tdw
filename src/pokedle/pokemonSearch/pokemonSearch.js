@@ -5,7 +5,7 @@ import { setSelectedPokemon } from '../../redux/selectedPokemonSlice';
 import './pokemonSearch.css';
 import '../../index.css';
 
-const PokemonSearch = ({ onPokemonClick }) => {
+const PokemonSearch = ({ onPokemonClick, hasWon }) => {
   const [search, setSearch] = useState('');
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const { data: pokemonList, error: listError, isLoading: listLoading } = useGetGen1PokemonListQuery();
@@ -32,8 +32,9 @@ const PokemonSearch = ({ onPokemonClick }) => {
     <div className='pokemon-search-container'>
       <input className='pokemon-search-input'
         type="text"
-        placeholder="Enter Pokémon name"
+        placeholder="Enter Pokémon Name"
         value={search}
+        disabled={hasWon}
         onChange={(e) => setSearch(e.target.value)}
       />
       {listLoading && <div className='pokemon-list-container-placeholder'>Loading...</div>}

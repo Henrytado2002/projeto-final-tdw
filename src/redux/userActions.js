@@ -7,7 +7,12 @@ export const fetchUser = (uid) => async (dispatch) => {
         const userRef = doc(db, 'users', uid);
         const userSnapshot = await getDoc(userRef);
         if (userSnapshot.exists()) {
-            dispatch(setUser(userSnapshot.data()));
+            const userData = userSnapshot.data();
+            // Convert Firestore Timestamp to a serializable format
+            if (userData.createdAt) {
+                userData.createdAt = userData.createdAt.toDate().toISOString();
+            }
+            dispatch(setUser(userData));
         }
     } catch (error) {
         console.error('Error fetching user data: ', error);
