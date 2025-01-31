@@ -25,7 +25,7 @@ function Home() {
             <Header />
             <div className='home-container'>
                 <div className='home-top-container'>
-                    <img className='home-title-image' src='./PokeStop-1-31-2025.png'/>
+                    <img className='home-title-image' src='./Pokeplay.png'/>
                     <div>
                         <img className='pokeball' src='./Pokebola-pokeball-png-0.png'/>
                     </div>

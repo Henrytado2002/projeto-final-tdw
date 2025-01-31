@@ -113,7 +113,7 @@ a, label{
     top: 0;
     left: 0;
     height: calc(100vh - 90px); 
-    width: 200px;
+    width: 370px;
     background-color: var(--color-darkblue); 
     z-index: 1; 
     display: flex;
@@ -121,12 +121,15 @@ a, label{
     transform: translateX(-100%);
     transition: transform 0.3s ease-out; 
     margin: 0;
-    padding: 90px 50px;
+    padding: 0;
+    padding-top: 90px;
     text-align: left;
     align-items: flex-start;
-    gap: 40px;
+    gap: 10px;
     max-height: 100vh;
     align-items: center;
+    box-shadow: 7px 0 5px rgba(0, 0, 0, 0.24);
+    margin-left: -7px;
 }
 
 .header .menu li {
@@ -141,20 +144,29 @@ a, label{
 }
 
 .header .menu button{
+    display: flex;
+    flex-direction: row;
     border-radius: 10px;
-    height: 70px;
-    width: 200px;
+    height: 65px;
+    width:320px;
     padding: 5px 10px;
     color: var(--color-lightning);
-    border: 3px solid var(--color-lightning);
+    border: none;
     background-color: transparent;
     font-size: 2.3em;
     font-weight: bold;
     transition: ease 200ms;
+    align-items: center;
+    margin-left: 7px;
+}
+
+.navicon{
+    margin-right: 5px;
 }
 
 .header .menu button:hover{
     background-color: rgb(96, 96, 252);
     cursor: pointer;
     transition: ease 200ms;
+    transform: scale(1.1,1.1);
 }

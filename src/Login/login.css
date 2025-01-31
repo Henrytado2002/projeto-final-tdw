@@ -16,6 +16,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 120px;
 }
 
 .placeholder-input{
@@ -30,6 +31,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    
 }
 
 .login-form{
@@ -48,9 +50,10 @@
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #007BFF;
+    background-color: #0961be;
     color: white;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .login-form-submit:hover  , .login-register-button:hover {
@@ -85,6 +88,12 @@
     margin-left: 5px;
     color: #007BFF;
     cursor: pointer;
+}
+
+.login-title{
+    position: absolute;
+    top: 10px;
+    height: 200px;
 }
 
 .fade-in{

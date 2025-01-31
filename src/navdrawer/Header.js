@@ -5,6 +5,13 @@ import './Header.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+//icons
+import { AiOutlineHome } from "react-icons/ai";
+import { TbPokeball } from "react-icons/tb";
+import { LuBrain } from "react-icons/lu";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { BiLogOut } from "react-icons/bi";
+
 function Header() {
     const menuRef = useRef(null);
     const user = useSelector((state) => state.user);
@@ -46,11 +53,12 @@ function Header() {
             
             {/* Menu */}
             <ul className="menu">
-                <li><button href="#" onClick={()=>navigate('/home')}>Home</button></li>
-                <li><button href="#" onClick={()=>navigate('/pokedle')}>Pokedle</button></li>
-                <li><button href="#">Option2</button></li>
-                <li><button href="#">Option3</button></li>
-                <li className='profile'><button href="#">logout</button></li>
+                <div>user data goes here</div>
+                <li><button href="#" onClick={()=>navigate('/home')}><AiOutlineHome className='navicon' />Home</button></li>
+                <li><button href="#" onClick={()=>navigate('/pokedle')}><TbPokeball className='navicon' />Pokedle</button></li>
+                <li><button href="#"><LuBrain className='navicon'/>Memokemon</button></li>
+                <li className='navbutton-bottom' ><button href="#"><IoInformationCircleOutline className='navicon'/>About</button></li>
+                <li className='navbutton-bottom'><button href="#"><BiLogOut className='navicon' />Logout</button></li>
             </ul>
         </header>
     );

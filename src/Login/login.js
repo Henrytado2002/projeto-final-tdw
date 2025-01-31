@@ -87,7 +87,9 @@ const Login = () => {
 
     return (
         <div className='login-page'>
+            <img className='login-title' src='./pokeplay.png'/>
             <div className="login-container">
+                
                 <div className="login-form-container">
                     <h2>{showRegister ? 'Register' : 'Login'}</h2>
                     <div className={isTransitioning ? 'login-overlay fade-in' : 'login-overlay fade-out'}></div>
@@ -97,7 +99,7 @@ const Login = () => {
                             <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                             <button className='login-form-submit' onClick={handleLogin}>Login</button>
                             <input className='placeholder-input' />
-                            <button className='login-form-submit' onClick={() => { navigate('/home') }}>go to home</button>
+                            <button className='login-form-submit' onClick={() => { navigate('/home') }}>Go to home</button>
                             <input className='placeholder-input' />
                         </div>
                     )}
