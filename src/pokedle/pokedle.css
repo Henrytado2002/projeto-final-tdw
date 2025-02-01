@@ -149,6 +149,7 @@
 .pokedle-title{
     height: 150px;
     margin-bottom: 50px;
+    margin-top: -50px;
 }
 
 .guesses-header{
@@ -190,7 +191,7 @@
 }
 
 .pokedle-user-info-games-text{
-    font-size: 0.8em;
+    font-size: 0.9em;
     font-weight: bold;
     text-align: center;
     margin-bottom: 0;
@@ -202,12 +203,86 @@
 
 
 .pokedle-info-card-number{
-    border: 2px solid black;
+    border: 4px solid black;
     font-size: 2em;
     border-radius: 8px;
-    padding: 15px;
+    padding: 20px;
     width: 40px;
     font-weight: bold;
     text-align: center;
     text-justify: center;
+}
+
+.rules-button {
+    position: relative;
+    top: 30px;
+    right: -240px;
+    padding: 10px;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.rules-button-icon {
+    color: rgba(0, 0, 0, 0.205);
+    cursor: pointer;
+    font-size: 3em;
+    transition: ease 200ms;
+}
+
+.rules-button-icon:hover {
+    transform: scale(1.2,1.2);
+    transition: ease 200ms;
+    color: rgba(0, 0, 0, 0.377)
+}
+
+.rules-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.rules-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rules-content h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.rules-content li {
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.rules-content .close-button {
+    position: relative;
+    top: 10px;
+    right: -300px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.541);
+}
+
+.rules-content .close-button:hover {
+    color: rgb(0, 0, 0);
+}
+
+.rules-content h2{
+    margin-top: -20px;
 }

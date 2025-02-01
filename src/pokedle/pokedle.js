@@ -8,10 +8,14 @@ import { incrementPokedleGamesWon, submitGuesses } from '../firebase/firestore';
 import { setRealPokemon } from '../redux/selectedPokemonSlice';
 import './pokedle.css';
 
+import { BsFillQuestionCircleFill } from "react-icons/bs";
+
+
 const Pokedle = () => {
     const dispatch = useDispatch();
     const { data: pokemonList, error, isLoading } = useGetGen1PokemonListQuery();
     const [guesses, setGuesses] = useState([]);
+    const [showRules, setShowRules] = useState(false);
     const [hasWon, setHasWon] = useState(false);
     const [showWinMessage, setShowWinMessage] = useState(false);
     const user = useSelector((state) => state.user);
@@ -82,6 +86,7 @@ const Pokedle = () => {
             <Header />
             <div className="pokedle-container-wrapper">
                 <div className="pokedle-container">
+                    <div className="rules-button" onClick={()=>{setShowRules(true)}}><BsFillQuestionCircleFill className="rules-button-icon"/></div>
                     <img src="/pokedle.png" className="pokedle-title" alt="Pokedle Title"/>
                     <PokemonSearch onPokemonClick={handlePokemonClick} hasWon={hasWon} />
                     <div className="playarea">
@@ -117,6 +122,23 @@ const Pokedle = () => {
                                 <button className='win-button' onClick={() => window.location.reload()}>Play Again</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+            {showRules && (
+                <div className="rules-overlay">
+                    <div className="rules-content">
+                        <button className="close-button" onClick={()=>{setShowRules(false)}}>X</button>
+                        <h2>Pokédle Rules:</h2>
+                        <ul>
+                            <li>You win if you guess the correct pokemon.</li>
+                            <li>Star by guessing a pokemon on the search bar.</li>
+                            <li>Each guess will give you information about the pokemon you chose.</li>
+                            <li>Each field of the information will show you how the correct<br></br> pokemon and the pokemon you chose are alike.</li>
+                            <li>If the field is green, they're alike, if it's red, they're not.</li>
+                            <li>If the field shows an arrow, the value either goes up or down, <br></br>indicated by the arrow.</li>
+                            <li>Try to guess the Pokémon in as few guesses as possible.</li>
+                        </ul>
                     </div>
                 </div>
             )}
