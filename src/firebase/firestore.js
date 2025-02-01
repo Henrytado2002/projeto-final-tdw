@@ -47,9 +47,9 @@ export const submitGuesses = async (userId, guesses) => {
 
     try {
         await updateDoc(userRef, {
-            pokedleGuesses: arrayUnion(...guesses)
+            pokedleGuesses: arrayUnion(guesses.length),
         });
     } catch (error) {
-        console.error("Error incrementing pokedleGamesWon: ", error);
+        console.error("Error submitting guesses: ", error);
     }
 };

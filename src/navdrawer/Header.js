@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import '../index.css';
 import './Header.css';
@@ -15,7 +15,14 @@ import { BiLogOut } from "react-icons/bi";
 function Header() {
     const menuRef = useRef(null);
     const user = useSelector((state) => state.user);
+
+    const [logoutOn, setLogoutOn] = useState(false);
+    
     const navigate=useNavigate(); 
+
+    useEffect(()=>{
+        console.log(logoutOn)
+    },[logoutOn])
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -41,6 +48,8 @@ function Header() {
         };
     }, []);
 
+    const pokedleWon = user.pokedleGamesWon ? user.pokedleGamesWon : "0"
+    const memokemonWon = user.memokemonGamesWon ? user.memokemonGamesWon : "0"
 
     return (
         <header className="header" ref={menuRef}>
@@ -53,13 +62,23 @@ function Header() {
             
             {/* Menu */}
             <ul className="menu">
-                <div>user data goes here</div>
-                <li><button href="#" onClick={()=>navigate('/home')}><AiOutlineHome className='navicon' />Home</button></li>
-                <li><button href="#" onClick={()=>navigate('/pokedle')}><TbPokeball className='navicon' />Pokedle</button></li>
-                <li><button href="#"><LuBrain className='navicon'/>Memokemon</button></li>
-                <li className='navbutton-bottom' ><button href="#"><IoInformationCircleOutline className='navicon'/>About</button></li>
-                <li className='navbutton-bottom'><button href="#"><BiLogOut className='navicon' />Logout</button></li>
+                
+                <li><button  onClick={()=>navigate('/home')}><AiOutlineHome className='navicon' />Home  </button></li>
+                <li><button  onClick={()=>navigate('/pokedle')}><TbPokeball className='navicon' />Pokedle </button></li>
+                <li><button onClick={()=>navigate('/pokedle')}><LuBrain className='navicon'/>Memokemon </button></li>
+                <li className='about-list-item' ><button ><IoInformationCircleOutline className='navicon'/>About</button></li>
+                <li className='logout-list-item'><button className='nav-logout-button' onClick={()=>{setLogoutOn(true)}}><BiLogOut className='navicon'  />Logout</button></li>
             </ul>
+
+            {logoutOn && (
+                <div className='logout-verification'>
+                    <div className='logout-verification-content'>
+                        <p>Do you really want to Logout of your account?</p>
+                        <button onClick={()=>{navigate('/')}}>Yes</button>
+                        <button onClick={()=>{setLogoutOn(false)}}>No</button>
+                    </div>
+                </div>
+            )}
         </header>
     );
 }

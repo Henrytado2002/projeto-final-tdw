@@ -4,6 +4,9 @@ const initialState = {
     uid: null,
     email: null,
     name: null,
+    pokedleGamesWon: 0,
+    memokemonGamesWon: 0,
+    pokedleGuesses: [],
 };
 
 const userSlice = createSlice({

@@ -14,7 +14,7 @@ const Pokedle = () => {
     const [guesses, setGuesses] = useState([]);
     const [hasWon, setHasWon] = useState(false);
     const [showWinMessage, setShowWinMessage] = useState(false);
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.user);
 
     useEffect(() => {
         if (pokemonList && pokemonList.results) {
@@ -35,19 +35,27 @@ const Pokedle = () => {
     const realPokemon = useSelector((state) => state.selectedPokemon.selectedPokemon);
     const { data: realPokemonData } = useGetPokemonByNameQuery(realPokemon);
 
+    function averageGuesses() {
+        const array = user.pokedleGuesses;
+        if (array.length === 0) {
+            return 0;
+        } else {
+            return array.reduce((a, b) => a + b) / array.length;
+        }
+    }
+
     useEffect(() => {
         win();
     }, [guesses]);
 
-    const win = async() => {
+    const win = async () => {
         if (selectedPokemon === realPokemon && !(selectedPokemon === null || realPokemon === null)) {
             setHasWon(true);
             setShowWinMessage(true);
-        }
-        if (user) {
-            await incrementPokedleGamesWon(user.uid); // Increment games won for the user
-            await submitGuesses(user.id, guesses); //add the number of guesses to the array in the user document 
-            
+            if (user) {
+                await incrementPokedleGamesWon(user.uid); // Increment games won for the user
+                await submitGuesses(user.uid, guesses); // Add the number of guesses to the array in the user document
+            }
         }
     };
 
@@ -112,6 +120,19 @@ const Pokedle = () => {
                     </div>
                 </div>
             )}
+            <div className="pokedle-user-info-container">
+                <p className="pokedle-user-info-name">{user.name}</p>
+                <div className='pokedle-info-card-container'>
+                    <div className='pokedle-info-card'>
+                        <p className="pokedle-user-info-games-text">Pokedle <br/>Games won</p>
+                        <div className='pokedle-info-card-number'>{user.pokedleGamesWon}</div>
+                    </div>
+                    <div className='pokedle-info-card'>
+                        <p className="pokedle-user-info-games-text">Average <br/> Guesses</p>
+                        <div className='pokedle-info-card-number'>{averageGuesses()}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

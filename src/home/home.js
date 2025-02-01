@@ -32,7 +32,8 @@ function Home() {
                 </div>
                 <div className='home-bottom-container'>
                     <div className='home-button-container'>
-                        <button className='home-button' onClick={()=>navigate('/pokedle')}><img className='home-pokedle-img' src='./pokedle.png'/></button>                        <button className='home-button'/>
+                        <button className='home-button' onClick={()=>navigate('/pokedle')}><img className='home-button-img' src='./pokedle.png'/></button>                        
+                        <button className='home-button' onClick={()=>navigate('/memokemon')}><img className='home-button-img' src='./memokemon.png'/></button>
                     </div>
                 </div>
             </div>
