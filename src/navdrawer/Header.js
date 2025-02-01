@@ -65,8 +65,8 @@ function Header() {
                 
                 <li><button  onClick={()=>navigate('/home')}><AiOutlineHome className='navicon' />Home  </button></li>
                 <li><button  onClick={()=>navigate('/pokedle')}><TbPokeball className='navicon' />Pokedle </button></li>
-                <li><button onClick={()=>navigate('/pokedle')}><LuBrain className='navicon'/>Memokemon </button></li>
-                <li className='about-list-item' ><button ><IoInformationCircleOutline className='navicon'/>About</button></li>
+                <li><button onClick={()=>navigate('/memokemon')}><LuBrain className='navicon'/>Memokemon </button></li>
+                <li className='about-list-item' ><button onClick={()=>{navigate('/about')}} ><IoInformationCircleOutline className='navicon'/>About</button></li>
                 <li className='logout-list-item'><button className='nav-logout-button' onClick={()=>{setLogoutOn(true)}}><BiLogOut className='navicon'  />Logout</button></li>
             </ul>
 

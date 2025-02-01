@@ -40,6 +40,20 @@ export const incrementPokedleGamesWon = async (userId) => {
     }
 };
 
+export const incrementMemokemonGamesWon = async (userId) => {
+    if (!userId) return;
+
+    const userRef = doc(db, "users", userId);
+
+    try {
+        await updateDoc(userRef, {
+            memokemonGamesWon: increment(1),
+        });
+    } catch (error) {
+        console.error("Error incrementing memokemonGamesWon: ", error);
+    }
+};
+
 export const submitGuesses = async (userId, guesses) => {
     if (!userId) return;
 
