@@ -99,7 +99,7 @@ const Login = () => {
                             <input className='login-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                             <button className='login-form-submit' onClick={handleLogin}>Login</button>
                             <input className='placeholder-input' />
-                            <button className='login-form-submit' onClick={() => { navigate('/home') }}>Go to home</button>
+                            <input className='placeholder-input' />
                             <input className='placeholder-input' />
                         </div>
                     )}

@@ -13,12 +13,14 @@ function Home() {
     const user = useSelector((state) => state.user);
     const { loading } = useAuth();
     const navigate = useNavigate();
-    console.log(user.name)
+    
     
 
     if (loading) {
         return <div>Loading...</div>;
     }
+
+    console.log("logged in as: ",user.name)
 
     return (
         <div className='home-wrapper'>

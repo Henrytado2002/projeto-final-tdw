@@ -5,6 +5,8 @@ import { useGetGen1PokemonListQuery } from '../redux/pokemonSlice';
 import { incrementMemokemonGamesWon } from '../firebase/firestore';
 import Header from '../navdrawer/Header';
 
+import { BsFillQuestionCircleFill } from "react-icons/bs";
+
 const shuffleArray = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
@@ -15,7 +17,9 @@ const Memokemon = () => {
   const [secondCard, setSecondCard] = useState(null);
   const [matchedPairs, setMatchedPairs] = useState(0);
   const [hasWon, setHasWon] = useState(false);
+  const [showWinMessage, setShowWinMessage] = useState(false);
   const [cards, setCards] = useState([]);
+  const [showRules, setShowRules] = useState(false);
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -77,7 +81,7 @@ const Memokemon = () => {
   }, [firstCard, secondCard]);
 
   useEffect(() => {
-    if (matchedPairs === cards.length / 2) {
+    if (matchedPairs >0 && matchedPairs === cards.length / 2) {
       win();
     }
   }, [matchedPairs]);
@@ -88,11 +92,11 @@ const Memokemon = () => {
   };
 
   const win = async () => {
-    if (matchedPairs === cards.length / 2) {
-      setHasWon(true);
-      if (user) {
-        await incrementMemokemonGamesWon(user.uid);
-      }
+    setHasWon(true);
+    setShowWinMessage(true);
+    console.log("wpm")
+    if (user) {
+      await incrementMemokemonGamesWon(user.uid);
     }
   };
 
@@ -114,6 +118,10 @@ const Memokemon = () => {
     }
   };
 
+  const handleCloseWinMessage = () => {
+    setShowWinMessage(false);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -131,6 +139,7 @@ const Memokemon = () => {
         <Header/>
         <div className='memokemon-page-container-wrapper'>
             <div className="memokemon-board">
+              <div className="rules-button" onClick={()=>{setShowRules(true)}}><BsFillQuestionCircleFill className="rules-button-icon"/></div>
                 <div className='memokemon-title-wrapper'>
                     <img className='memokemon-title' src='./memokemon.png'/>
                 </div>
@@ -157,6 +166,35 @@ const Memokemon = () => {
           </div>
         </div>
       </div>
+      {showWinMessage && (
+                <div className="win-message-wrapper">
+                    <div className="win-message">
+                        <div className="win-message-content">
+                            <img className='win-img' src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGEzcjJ3N2FtZmdxYzNndnZkbnFoeGU2enBodG9iZ3N0aXZsejY3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yOWoBXl9clt5dBDstA/giphy.gif" alt="celebration" />
+                            <div className="win-text">
+                                <button className="close-button" onClick={handleCloseWinMessage}>X</button>
+                                <h2>Congratulations,<br/>You Won!</h2>
+                                
+                                <button className='win-button' onClick={() => window.location.reload()}>Play Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showRules && (
+                <div className="rules-overlay">
+                    <div className="rules-content">
+                        <button className="close-button" onClick={()=>{setShowRules(false)}}>X</button>
+                        <h2>Memokemon Rules:</h2>
+                        <ul>
+                            <li>Click the cards to flip them.</li>
+                            <li>The objective is to find the pairs of pokemon in the cards.</li>
+                            <li>You may only have two cards flipped at one time.</li>
+                            <li>You if you find all the pairs of pokemon!</li>
+                        </ul>
+                    </div>
+                </div>
+            )}
     </div>
   );
 };

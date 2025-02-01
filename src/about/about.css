@@ -1,0 +1,26 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.about-info-wrapper {
+    height: 100vh;
+    justify-items: center;
+    align-content: center;
+    background-color: rgba(64, 159, 247, 0.507);
+}
+
+.about-info-container{
+    background-color: rgba(255, 255, 255, 0.568);
+    height: 70%;
+    padding: 50px;
+    width: 700px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 15, 99, 0.418);
+}
+
+
+.about-title{
+    text-align: center;
+    font-weight: bold;
+}

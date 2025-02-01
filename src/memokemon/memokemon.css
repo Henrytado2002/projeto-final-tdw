@@ -33,6 +33,7 @@ html, body {
   .memokemon-title-wrapper{
     width: 100%;
     text-align: center;
+    margin-top: -50px;
   }
 
   .memokemon-title{
@@ -48,6 +49,7 @@ html, body {
     position: relative;
     
   }
+
   
   .memokemon-card.flipped .memokemon-card-front {
     transform: rotateY(0);
@@ -85,10 +87,16 @@ html, body {
     text-align: center;
     background: rgb(255,255,255);
     background: radial-gradient(circle, rgba(255,255,255,1) 10%, rgba(151,160,238,1) 26%, rgba(86,107,228,1) 59%);
+    transition: ease 200ms;
+  }
+  
+  .memokemon-card-back:hover {
+    transform: scale(1.05, 1.05);
+    transition: ease 200ms;
   }
 
   .card-back-pokemon{
     height: 40%;
-
+    
   }
   

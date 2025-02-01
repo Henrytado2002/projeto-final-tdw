@@ -20,10 +20,6 @@ function Header() {
     
     const navigate=useNavigate(); 
 
-    useEffect(()=>{
-        console.log(logoutOn)
-    },[logoutOn])
-
     useEffect(() => {
         const handleOutsideClick = (e) => {
             const checkbox = document.getElementById("menu-btn");
