@@ -5,17 +5,12 @@ import { useAuth } from '../context/authContext';
 import './home.css'
 import '../index.css'
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser } from '../firebase/auth';
-import { setUser } from '../redux/userReducer';
-import { useDispatch } from 'react-redux';
 
 function Home() {
     const user = useSelector((state) => state.user);
     const { loading } = useAuth();
     const navigate = useNavigate();
     
-    
-
     if (loading) {
         return <div>Loading...</div>;
     }

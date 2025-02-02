@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const userCredential = await doCreateUserWithEmailAndPassword(email, password, name);
             setUser(userCredential.user);
-            await dispatch(fetchUser(userCredential.user.uid));
+            await dispatch(fetchUser(userCredential.user.uid)); //user into redux data store
             return userCredential.user;
         } catch (error) {
             console.error('Error registering user: ', error);

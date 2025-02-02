@@ -6,10 +6,10 @@ import { useGetGen1PokemonListQuery, useGetPokemonByNameQuery } from '../redux/p
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementPokedleGamesWon, submitGuesses } from '../firebase/firestore';
 import { setRealPokemon } from '../redux/selectedPokemonSlice';
-import './pokedle.css';
 
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 
+import './pokedle.css';
 
 const Pokedle = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Pokedle = () => {
     const [showWinMessage, setShowWinMessage] = useState(false);
     const user = useSelector((state) => state.user);
 
-    useEffect(() => {
+    useEffect(() => { //as soon as pokemon =List is avalibale, get a random pokemon from
         if (pokemonList && pokemonList.results) {
             const rand_poke_name = pokemonList.results[Math.floor(Math.random() * 151)].name;
             dispatch(setRealPokemon(rand_poke_name));
@@ -35,8 +35,8 @@ const Pokedle = () => {
         }
     };
 
-    const selectedPokemon = useSelector((state) => state.selectedPokemon.realPokemon);
-    const realPokemon = useSelector((state) => state.selectedPokemon.selectedPokemon);
+    const selectedPokemon = useSelector((state) => state.selectedPokemon.selectedPokemon);
+    const realPokemon = useSelector((state) => state.selectedPokemon.realPokemon);
     const { data: realPokemonData } = useGetPokemonByNameQuery(realPokemon);
 
     function averageGuesses() {
@@ -44,7 +44,8 @@ const Pokedle = () => {
         if (array.length === 0) {
             return 0;
         } else {
-            return array.reduce((a, b) => a + b) / array.length;
+            // return the rounded mean of the numbers of guesses that the user has already done 
+            return Math.round(array.reduce((a, b) => a + b) / array.length);
         }
     }
 
@@ -86,8 +87,8 @@ const Pokedle = () => {
             <Header />
             <div className="pokedle-container-wrapper">
                 <div className="pokedle-container">
-                    <div className="rules-button" onClick={()=>{setShowRules(true)}}><BsFillQuestionCircleFill className="rules-button-icon"/></div>
-                    <img src="/pokedle.png" className="pokedle-title" alt="Pokedle Title"/>
+                    <div className="rules-button" onClick={() => { setShowRules(true) }}><BsFillQuestionCircleFill className="rules-button-icon" /></div>
+                    <img src="/pokedle.png" className="pokedle-title" alt="Pokedle Title" />
                     <PokemonSearch onPokemonClick={handlePokemonClick} hasWon={hasWon} />
                     <div className="playarea">
                         <h2 className='playarea-title'>Previous Guesses:</h2>
@@ -113,7 +114,7 @@ const Pokedle = () => {
                             <img className='win-img' src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGEzcjJ3N2FtZmdxYzNndnZkbnFoeGU2enBodG9iZ3N0aXZsejY3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yOWoBXl9clt5dBDstA/giphy.gif" alt="celebration" />
                             <div className="win-text">
                                 <button className="close-button" onClick={handleCloseWinMessage}>X</button>
-                                <h2>Congratulations,<br/>you've guessed it!</h2>
+                                <h2>Congratulations,<br />you've guessed it!</h2>
                                 <h2>It was  {realPokemon}</h2>
                                 {realPokemonData && realPokemonData.sprites && (
                                     <img className='pokemon-guessed-win-image' src={realPokemonData.sprites.front_default} alt="Guessed Pokemon" />
@@ -128,7 +129,7 @@ const Pokedle = () => {
             {showRules && (
                 <div className="rules-overlay">
                     <div className="rules-content">
-                        <button className="close-button" onClick={()=>{setShowRules(false)}}>X</button>
+                        <button className="close-button" onClick={() => { setShowRules(false) }}>X</button>
                         <h2>Pokédle Rules:</h2>
                         <ul>
                             <li>You win if you guess the correct pokemon.</li>
@@ -146,11 +147,11 @@ const Pokedle = () => {
                 <p className="pokedle-user-info-name">{user.name}</p>
                 <div className='pokedle-info-card-container'>
                     <div className='pokedle-info-card'>
-                        <p className="pokedle-user-info-games-text">Pokedle <br/>Games won</p>
+                        <p className="pokedle-user-info-games-text">Pokedle <br />Games won</p>
                         <div className='pokedle-info-card-number'>{user.pokedleGamesWon}</div>
                     </div>
                     <div className='pokedle-info-card'>
-                        <p className="pokedle-user-info-games-text">Average <br/> Guesses</p>
+                        <p className="pokedle-user-info-games-text">Average <br /> Guesses</p>
                         <div className='pokedle-info-card-number'>{averageGuesses()}</div>
                     </div>
                 </div>

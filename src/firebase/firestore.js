@@ -54,7 +54,7 @@ export const incrementMemokemonGamesWon = async (userId) => {
     }
 };
 
-export const submitGuesses = async (userId, guesses) => {
+export const submitGuesses = async (userId, guesses) => { //add a new number of guesses to the array
     if (!userId) return;
 
     const userRef = doc(db, "users", userId);

@@ -3,27 +3,27 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { createUserDocument } from "./firestore"; // Import createUserDocument function
 
 export const doCreateUserWithEmailAndPassword = async (email, password, name) => {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  const user = userCredential.user;
+	const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+	const user = userCredential.user;
 
-  await updateProfile(user, {
-    displayName: name
-  });
+	await updateProfile(user, {
+		displayName: name
+	});
 
-  // Create a user document in Firestore
-  await createUserDocument(user);
+	// Create a user document in Firestore
+	await createUserDocument(user);
 
-  return user;
+	return user;
 };
 
 export const doSignInWithEmailAndPassword = async (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
+	return signInWithEmailAndPassword(auth, email, password);
 };
 
 export const doSignOut = async () => {
-  return auth.signOut();
+	return auth.signOut();
 };
 
 export const getCurrentUser = () => {
-  return auth.currentUser;
+	return auth.currentUser;
 };

@@ -12,12 +12,12 @@ const selectedPokemonSlice = createSlice({
         setSelectedPokemon(state, action) {
             state.selectedPokemon = action.payload;
         },
-        setRealPokemon(state, action){
+        setRealPokemon(state, action) {
             state.realPokemon = action.payload;
         }
     },
-    
-    
+
+
 });
 
 export const { setSelectedPokemon, setRealPokemon } = selectedPokemonSlice.actions;

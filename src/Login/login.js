@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import './login.css';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/userReducer';
 import { fetchUser } from '../redux/userActions';
 
 const Login = () => {
@@ -16,7 +15,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [name, setName] = useState('');
 
-    useEffect(() => {
+    useEffect(() => { // display error messages everytime there is one
         if (errorMessage) {
             alert(errorMessage);
         }
@@ -41,7 +40,7 @@ const Login = () => {
         try {
             const userCredential = await doSignInWithEmailAndPassword(email, password);
             const user = userCredential.user;
-            
+
             dispatch(fetchUser(user.uid)); // Fetch and set user data in Redux store
             navigate('/home');
         } catch (error) {
@@ -87,9 +86,9 @@ const Login = () => {
 
     return (
         <div className='login-page'>
-            <img className='login-title' src='./pokeplay.png'/>
+            <img className='login-title' src='./pokeplay.png' />
             <div className="login-container">
-                
+
                 <div className="login-form-container">
                     <h2>{showRegister ? 'Register' : 'Login'}</h2>
                     <div className={isTransitioning ? 'login-overlay fade-in' : 'login-overlay fade-out'}></div>

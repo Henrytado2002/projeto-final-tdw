@@ -1,102 +1,102 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 .memokemon-page-container {
-    height: 100vh;
-    background-image: url('../../public/landscape.png');
-    background-size: cover;
+	height: 100vh;
+	background-image: url('../../public/landscape.png');
+	background-size: cover;
 }
 
-.memokemon-page-container-wrapper{
-    height: 100vh;
-    align-content: center;
+.memokemon-page-container-wrapper {
+	height: 100vh;
+	align-content: center;
 }
 
 .memokemon-board {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 500px;
-    margin: 0 auto;
-    
-    padding-left: 50px;
-    padding-right: 65px;
-    padding-top: 10px;
-    padding-bottom: 65px;
-    border-radius: 20px;
-    background-color: rgba(245, 245, 245, 0.726);
-  }
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 500px;
+	margin: 0 auto;
 
-  .memokemon-title-wrapper{
-    width: 100%;
-    text-align: center;
-    margin-top: -50px;
-  }
+	padding-left: 50px;
+	padding-right: 65px;
+	padding-top: 10px;
+	padding-bottom: 65px;
+	border-radius: 20px;
+	background-color: rgba(245, 245, 245, 0.726);
+}
 
-  .memokemon-title{
-    height: 100px;
-  }
-  
-  .memokemon-card {
-    width: 100px;
-    height: 100px;
-    margin: 10px 10px;
-    perspective: 1000px;
-    cursor: pointer;
-    position: relative;
-    
-  }
+.memokemon-title-wrapper {
+	width: 100%;
+	text-align: center;
+	margin-top: -50px;
+}
 
-  
-  .memokemon-card.flipped .memokemon-card-front {
-    transform: rotateY(0);
-    border: 7px black solid;
-    border-radius: 10px;
-  }
-  
-  .memokemon-card.flipped .memokemon-card-back {
-    transform: rotateY(180deg);
-  }
-  
-  .memokemon-card-front,
-  .memokemon-card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: transform 0.6s;
-  }
-  
-  .memokemon-card-front {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    transform: rotateY(180deg);
-  }
-  
-  .memokemon-card-back {
-    transform: rotateY(0);
-    border: 7px solid rgb(34, 34, 83);
-    border-radius: 8px;
-    align-content: center;
-    text-align: center;
-    background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,1) 10%, rgba(151,160,238,1) 26%, rgba(86,107,228,1) 59%);
-    transition: ease 200ms;
-  }
-  
-  .memokemon-card-back:hover {
-    transform: scale(1.05, 1.05);
-    transition: ease 200ms;
-  }
+.memokemon-title {
+	height: 100px;
+}
 
-  .card-back-pokemon{
-    height: 40%;
-    
-  }
-  
+.memokemon-card {
+	width: 100px;
+	height: 100px;
+	margin: 10px 10px;
+	perspective: 1000px;
+	cursor: pointer;
+	position: relative;
+
+}
+
+
+.memokemon-card.flipped .memokemon-card-front {
+	transform: rotateY(0);
+	border: 7px black solid;
+	border-radius: 10px;
+}
+
+.memokemon-card.flipped .memokemon-card-back {
+	transform: rotateY(180deg);
+}
+
+.memokemon-card-front,
+.memokemon-card-back {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	backface-visibility: hidden;
+	transition: transform 0.6s;
+}
+
+.memokemon-card-front {
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+	transform: rotateY(180deg);
+}
+
+.memokemon-card-back {
+	transform: rotateY(0);
+	border: 7px solid rgb(34, 34, 83);
+	border-radius: 8px;
+	align-content: center;
+	text-align: center;
+	background: rgb(255, 255, 255);
+	background: radial-gradient(circle, rgba(255, 255, 255, 1) 10%, rgba(151, 160, 238, 1) 26%, rgba(86, 107, 228, 1) 59%);
+	transition: ease 200ms;
+}
+
+.memokemon-card-back:hover {
+	transform: scale(1.05, 1.05);
+	transition: ease 200ms;
+}
+
+.card-back-pokemon {
+	height: 40%;
+
+}

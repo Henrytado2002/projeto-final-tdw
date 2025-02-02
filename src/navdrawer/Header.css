@@ -7,14 +7,15 @@
     justify-content: space-between;
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    background-color: transparent; 
-    color: var(--color-lightwhite); 
+    background-color: transparent;
+    color: var(--color-lightwhite);
     height: 50px;
 }
 
-a, label{
-    touch-action: manipulation; 
-    outline: none; 
+a,
+label {
+    touch-action: manipulation;
+    outline: none;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -25,35 +26,35 @@ a, label{
 
 .header .menu-icon {
     cursor: pointer;
-    display: flex; 
+    display: flex;
     align-items: center;
     width: auto;
     position: relative;
     user-select: none;
-    z-index: 3; 
+    z-index: 3;
     height: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 10px; 
-    transition: background-color 0.3s ease; 
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
     background-color: var(--color-darkblue);
 }
 
 .header .menu-icon:hover {
-    background-color: rgb(96, 96, 252); 
+    background-color: rgb(96, 96, 252);
 }
 
 .header .menu-icon .menu-text {
-    margin-left: 10px; 
-    color: var(--color-lightning); 
+    margin-left: 10px;
+    color: var(--color-lightning);
     font-size: 2em;
     font-family: 'Courier New', Courier, monospace;
-    font-weight: bold; 
+    font-weight: bold;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .header .menu-icon .navicon {
-    background: var(--color-lightning); 
+    background: var(--color-lightning);
     display: block;
     height: 4px;
     width: 30px;
@@ -63,7 +64,7 @@ a, label{
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-    background: var(--color-lightning); 
+    background: var(--color-lightning);
     content: '';
     display: block;
     height: 4px;
@@ -81,30 +82,30 @@ a, label{
     top: -7px;
 }
 
-.header .menu-btn:checked ~ .menu {
+.header .menu-btn:checked~.menu {
     transform: translateX(0);
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon {
+.header .menu-btn:checked~.menu-icon .navicon {
     background: transparent;
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
+.header .menu-btn:checked~.menu-icon .navicon:before {
     transform: rotate(-45deg);
     top: 0;
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
+.header .menu-btn:checked~.menu-icon .navicon:after {
     transform: rotate(45deg);
     top: 0;
 }
 
-.header .menu-btn:checked ~ .menu-icon .menu-text {
+.header .menu-btn:checked~.menu-icon .menu-text {
     opacity: 0;
     visibility: hidden;
-    width: 0; 
-    margin: 0; 
-    padding: 0; 
+    width: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Menu */
@@ -112,14 +113,14 @@ a, label{
     position: absolute;
     top: 0;
     left: 0;
-    height: calc(100vh - 90px); 
+    height: calc(100vh - 90px);
     width: 370px;
-    background-color: var(--color-darkblue); 
-    z-index: 1; 
+    background-color: var(--color-darkblue);
+    z-index: 1;
     display: flex;
     flex-direction: column;
     transform: translateX(-100%);
-    transition: transform 0.3s ease-out; 
+    transition: transform 0.3s ease-out;
     margin: 0;
     padding: 0;
     padding-top: 90px;
@@ -140,15 +141,15 @@ a, label{
 
 
 .header .menu li a:hover {
-    color: #ddd; 
+    color: #ddd;
 }
 
-.header .menu button{
+.header .menu button {
     display: flex;
     flex-direction: row;
     border-radius: 10px;
     height: 65px;
-    width:320px;
+    width: 320px;
     padding: 5px 10px;
     color: var(--color-lightning);
     border: none;
@@ -160,22 +161,22 @@ a, label{
     margin-left: 7px;
 }
 
-.navicon{
+.navicon {
     margin-right: 5px;
 }
 
-.header .menu button:hover{
+.header .menu button:hover {
     background-color: rgb(96, 96, 252);
     cursor: pointer;
     transition: ease 200ms;
-    transform: scale(1.1,1.1);
+    transform: scale(1.1, 1.1);
 }
 
-.header .menu .about-list-item{
+.header .menu .about-list-item {
     margin-top: auto;
 }
 
-.header .menu .logout-list-item{
+.header .menu .logout-list-item {
     margin-bottom: 30px;
 }
 
@@ -183,7 +184,7 @@ a, label{
     color: rgb(255, 72, 0);
 }
 
-.trophy-wrapper{
+.trophy-wrapper {
     margin-left: 10px;
     display: flex;
     align-items: center;
@@ -197,13 +198,13 @@ a, label{
     background-size: cover;
 }
 
-.header .menu button .games-won-number{
+.header .menu button .games-won-number {
     font-size: 0.4em;
     margin-bottom: 28px;
     color: var(--color-lightning);
 }
 
-.logout-verification{
+.logout-verification {
     position: fixed;
     top: 0;
     left: 0;
@@ -216,7 +217,7 @@ a, label{
     z-index: 1000;
 }
 
-.logout-verification-content{
+.logout-verification-content {
     background-color: white;
     color: black;
     padding: 50px;
