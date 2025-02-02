@@ -184,20 +184,6 @@ label {
     color: rgb(255, 72, 0);
 }
 
-.trophy-wrapper {
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
-    height: 40px;
-    width: 40px;
-    background-image: url("../../public/trophy.png");
-    background-repeat: none;
-    background-position: center;
-    background-size: cover;
-}
-
 .header .menu button .games-won-number {
     font-size: 0.4em;
     margin-bottom: 28px;

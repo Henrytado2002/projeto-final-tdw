@@ -39,6 +39,8 @@ const Pokedle = () => {
     const realPokemon = useSelector((state) => state.selectedPokemon.realPokemon);
     const { data: realPokemonData } = useGetPokemonByNameQuery(realPokemon);
 
+    
+
     function averageGuesses() {
         const array = user.pokedleGuesses;
         if (array.length === 0) {
