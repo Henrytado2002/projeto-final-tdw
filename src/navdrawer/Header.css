@@ -48,7 +48,7 @@ label {
     margin-left: 10px;
     color: var(--color-lightning);
     font-size: 2em;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
