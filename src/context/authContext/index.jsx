@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { auth } from "../../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = React.createContext();
 
 export function useAuth() {
-    return useContext(AuthContext)
+    return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
@@ -14,31 +15,34 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, initializeUser)
-        return unsubscribe
+        const unsubscribe = onAuthStateChanged(auth, initializeUser);
+        return unsubscribe;
     }, []);
 
     async function initializeUser(user) {
         if (user) {
-            setCurrentUser({ ...user })
-            setUserLoggedIn(true)
+            setCurrentUser({ ...user });
+            setUserLoggedIn(true);
         } else {
-            setCurrentUser(null)
-            setUserLoggedIn(false)
+            setCurrentUser(null);
+            setUserLoggedIn(false);
         }
-        setLoading(false)
+        setLoading(false);
     }
 
     const value = {
         currentUser,
         userLoggedIn,
         loading
-    }
+    };
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
-    )
-
+    );
 }
+
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};

@@ -116,7 +116,7 @@ const Pokedle = () => {
                             <img className='win-img' src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGEzcjJ3N2FtZmdxYzNndnZkbnFoeGU2enBodG9iZ3N0aXZsejY3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yOWoBXl9clt5dBDstA/giphy.gif" alt="celebration" />
                             <div className="win-text">
                                 <button className="close-button" onClick={handleCloseWinMessage}>X</button>
-                                <h2>Congratulations,<br />you've guessed it!</h2>
+                                <h2>Congratulations,<br />you&apos;ve guessed it!</h2>
                                 <h2>It was  {realPokemon}</h2>
                                 {realPokemonData && realPokemonData.sprites && (
                                     <img className='pokemon-guessed-win-image' src={realPokemonData.sprites.front_default} alt="Guessed Pokemon" />
@@ -138,7 +138,7 @@ const Pokedle = () => {
                             <li>Star by guessing a pokemon on the search bar.</li>
                             <li>Each guess will give you information about the pokemon you chose.</li>
                             <li>Each field of the information will show you how the correct<br></br> pokemon and the pokemon you chose are alike.</li>
-                            <li>If the field is green, they're alike, if it's red, they're not.</li>
+                            <li>If the field is green, they&apos;re alike, if it&apos;s red, they&apos;re not.</li>
                             <li>If the field shows an arrow, the value either goes up or down, <br></br>indicated by the arrow.</li>
                             <li>Try to guess the Pokémon in as few guesses as possible.</li>
                         </ul>

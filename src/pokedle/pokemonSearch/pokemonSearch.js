@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetGen1PokemonListQuery, useGetPokemonByNameQuery } from '../../redux/pokemonSlice';
 import { setSelectedPokemon } from '../../redux/selectedPokemonSlice';
@@ -52,6 +53,11 @@ const PokemonSearch = ({ onPokemonClick, hasWon }) => {
 	);
 };
 
+PokemonSearch.propTypes = {
+	onPokemonClick: PropTypes.func.isRequired,
+	hasWon: PropTypes.bool.isRequired,
+  };
+
 const PokemonDetails = ({ name, onClick }) => {
 	const { data: pokemon, error, isLoading } = useGetPokemonByNameQuery(name);
 
@@ -71,5 +77,10 @@ const PokemonDetails = ({ name, onClick }) => {
 		</li>
 	);
 };
+
+PokemonDetails.propTypes = {
+	name: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
+  };
 
 export default PokemonSearch;

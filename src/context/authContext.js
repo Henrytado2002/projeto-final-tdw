@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { auth } from '../firebase/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -30,11 +31,9 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
             const userCredential = await doCreateUserWithEmailAndPassword(email, password, name);
-            setUser(userCredential.user);
-            await dispatch(fetchUser(userCredential.user.uid)); //user into redux data store
-            return userCredential.user;
+            // Handle user registration logic here
         } catch (error) {
-            console.error('Error registering user: ', error);
+            console.error("Error registering user: ", error);
         } finally {
             setLoading(false);
         }
@@ -47,6 +46,8 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-export const useAuth = () => {
-    return useContext(AuthContext);
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
+
+export const useAuth = () => useContext(AuthContext);

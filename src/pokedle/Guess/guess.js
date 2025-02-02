@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useGetPokemonByNameQuery, useGetPokemonSpeciesInfoByNameQuery } from '../../redux/pokemonSlice';
 import { useSelector } from 'react-redux';
 import './guess.css';
@@ -103,6 +104,10 @@ const Guess = ({ pokemonName }) => {
 			</div>
 		</div>
 	);
+};
+
+Guess.propTypes = {
+	pokemonName: PropTypes.string.isRequired,
 };
 
 export default Guess;
