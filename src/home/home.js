@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../navdrawer/Header';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../firebase/context/authContext';
 import './home.css'
 import '../index.css'
 import { useNavigate } from 'react-router-dom';

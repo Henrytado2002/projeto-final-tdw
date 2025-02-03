@@ -11,7 +11,7 @@ import About from './about/about';
 import Memokemon from './memokemon/memokemon';
 
 import './index.css';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider } from './firebase/context/authContext';
 
 
 //######## ROUTING ##########

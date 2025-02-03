@@ -12,22 +12,17 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [name, setName] = useState('');
-
-    useEffect(() => { // display error messages everytime there is one
-        if (errorMessage) {
-            alert(errorMessage);
-        }
-    }, [errorMessage]);
 
     function doInputVerifications() { //returns false if there are errors
         if (email === '' || password === '') {
-            setErrorMessage('All fields must not be empty');
+            alert('All fields must not be empty');
+            
             return false;
         }
         if (!isEmail(email)) {
-            setErrorMessage('Email is not valid');
+            alert('Email is not valid');
+            
             return false;
         }
         return true;
@@ -44,7 +39,7 @@ const Login = () => {
             dispatch(fetchUser(user.uid)); // Fetch and set user data in Redux store
             navigate('/home');
         } catch (error) {
-            setErrorMessage(error.message);
+            alert(error.message);
             return;
         }
     }
@@ -54,11 +49,11 @@ const Login = () => {
             return;
         }
         if (name === '' || confirmPassword === '') {
-            setErrorMessage('All fields must not be empty');
+            alert('All fields must not be empty');
             return;
         }
         if (password !== confirmPassword) {
-            setErrorMessage('Passwords do not match');
+            alert('Passwords do not match');
             return;
         }
 
@@ -67,9 +62,10 @@ const Login = () => {
             const userCredential = await doSignInWithEmailAndPassword(email, password);
             const user = userCredential.user;
             dispatch(fetchUser(user.uid)); // Fetch and set user data in Redux store
-            navigate('/home');
+            alert('Account created successfully! Please, LogIn with your account');
+            handleRegisterLinkClick();
         } catch (error) {
-            setErrorMessage(error.message);
+            alert(error.message);
         }
     }
 
