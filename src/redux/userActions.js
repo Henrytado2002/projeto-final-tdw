@@ -12,6 +12,7 @@ export const fetchUser = (uid) => async (dispatch) => {
             if (userData.createdAt) {
                 userData.createdAt = userData.createdAt.toDate().toISOString();
             }
+            console.log("fetch data:" , userData);
             dispatch(setUser(userData));
         }
     } catch (error) {
