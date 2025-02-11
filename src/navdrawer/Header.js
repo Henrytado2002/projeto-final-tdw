@@ -1,7 +1,10 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { setUser } from '../redux/userReducer';
+import { doSignOut } from '../firebase/auth';
+import { resetUser } from '../redux/userReducer';
 
 //icons
 import { AiOutlineHome } from "react-icons/ai";
@@ -12,11 +15,23 @@ import { BiLogOut } from "react-icons/bi";
 
 import '../index.css';
 import './Header.css';
+import { useDispatch } from 'react-redux';
 
 function Header() {
     const menuRef = useRef(null);
     const [logoutOn, setLogoutOn] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = async ()=>{
+        try {
+            await doSignOut();
+            dispatch(resetUser());
+            navigate('/');
+        } catch (error) {
+            console.error('Error logging out: ', error);
+        }
+    }
 
     useEffect(() => {
         const handleOutsideClick = (e) => { //if user clicks outside the navdrawer, it closes
@@ -65,7 +80,7 @@ function Header() {
                 <div className='logout-verification'>
                     <div className='logout-verification-content'>
                         <p>Do you really want to Logout of your account?</p>
-                        <button onClick={() => { navigate('/') }}>Yes</button>
+                        <button onClick={handleLogout}>Yes</button>
                         <button onClick={() => { setLogoutOn(false) }}>No</button>
                     </div>
                 </div>

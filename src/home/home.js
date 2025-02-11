@@ -15,7 +15,11 @@ function Home() {
         return <div>Loading...</div>;
     }
 
-    console.log("logged in as: ",user.name)
+    if(user.uid===null){
+        return (<div>Not Logged in, turn back</div>)
+    }
+
+    console.log("logged in as: ",user.name, user.uid)
 
     return (
         <div className='home-wrapper'>
