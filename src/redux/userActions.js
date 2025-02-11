@@ -9,7 +9,7 @@ export const fetchUser = (uid) => async (dispatch) => {
         if (userSnapshot.exists()) {
             const userData = userSnapshot.data();
             // Convert Firestore Timestamp to a serializable format
-            if (userData.createdAt) {
+            if (userData.createdAt && userData.createdAt.toDate) {
                 userData.createdAt = userData.createdAt.toDate().toISOString();
             }
             console.log("fetch data:" , userData);

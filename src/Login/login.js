@@ -108,8 +108,8 @@ const Login = () => {
                         </div>
                     )}
                     <div className='login-link-container'>
-                        <p href='' className='login-register-first-text'>{!showRegister ? "Not registered yet? " : ""}</p>
-                        <button href='' className='login-register-link' onClick={handleRegisterLinkClick}>
+                        <p className='login-register-first-text'>{!showRegister ? "Not registered yet? " : ""}</p>
+                        <button className='login-register-link' onClick={handleRegisterLinkClick}>
                             {showRegister ? 'Back to Login' : "Create an account"}
                         </button>
                     </div>

@@ -37,7 +37,9 @@ const Pokedle = () => {
 
     const selectedPokemon = useSelector((state) => state.selectedPokemon.selectedPokemon);
     const realPokemon = useSelector((state) => state.selectedPokemon.realPokemon);
-    const { data: realPokemonData } = useGetPokemonByNameQuery(realPokemon);
+    const { data: realPokemonData, isLoading: realPokemonLoading } = useGetPokemonByNameQuery(realPokemon, {
+        skip: !realPokemon, // Skip the query if realPokemon is null
+    });
 
     
 
@@ -83,6 +85,8 @@ const Pokedle = () => {
         console.log('No data available');
         return <div>No data available</div>;
     }
+
+    console.log("real:" , realPokemon)
 
     return (
         <div className='pokedle'>
